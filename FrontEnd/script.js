@@ -204,7 +204,7 @@ function generateWorksModal(){
                     "Authorization": `Bearer ${sessionStorage["token"]}`,
                 }
             });
-            await refreshWorks();
+            const worksP = await refreshWorks();
             document.querySelector(".gallery").innerHTML = "";
             genererSophieWorks(sophieWorks);
             document.querySelector(".m-gallery").innerHTML = "";
