@@ -351,7 +351,7 @@ submitFormAddWork.addEventListener("click", async function(event){
     event.preventDefault();
     if (newWorkPhoto.files[0] && newWorkTitle.value && newWorkCategory.value){
         await addWork();
-        await refreshWorks();
+        const worksP = await refreshWorks();
         modalContainer.innerText = "";
         
         alert("Your work has been succesfully added");
@@ -367,9 +367,12 @@ submitFormAddWork.addEventListener("click", async function(event){
 
 async function refreshWorks(){
     const answer = await fetch("http://localhost:5678/api/works")
-    worksP = await answer.json();
+    const worksP = await answer.json();
     const worksJSON = JSON.stringify(worksP);
+
     window.sessionStorage.setItem("worksP", worksJSON);
+    return Promise.resolve(worksJSON)
+
 };
 
 function checkDisabled (){
